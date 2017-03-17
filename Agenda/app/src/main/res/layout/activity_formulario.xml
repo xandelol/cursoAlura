@@ -10,6 +10,26 @@
         tools:context="br.com.alura.agenda.FormularioActivity"
         android:orientation="vertical">
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="225dp">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:id="@+id/formulario_foto_aluno"
+                android:background="#00a7f0"
+                android:src="@drawable/person"/>
+            <Button
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:id="@+id/formulario_botao_foto"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:elevation="7dp"
+                android:background="@drawable/fundo_camera"/>
+        </RelativeLayout>
+
         <EditText
             android:id="@+id/formulario_nome"
             android:layout_width="match_parent"

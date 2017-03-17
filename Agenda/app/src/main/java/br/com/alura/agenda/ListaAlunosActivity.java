@@ -3,10 +3,13 @@ package br.com.alura.agenda;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.ContextMenu;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Adapter;
@@ -19,17 +22,24 @@ import android.widget.Toast;
 import java.util.List;
 import java.util.jar.Manifest;
 
+import br.com.alura.agenda.adapter.AlunosAdapter;
+import br.com.alura.agenda.converter.AlunoConverter;
 import br.com.alura.agenda.dao.AlunoDAO;
 import br.com.alura.agenda.modelo.Aluno;
 
 public class ListaAlunosActivity extends AppCompatActivity {
 
     private ListView listaAlunos;
+    private int CODIGO_SMS=321;
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_alunos);
+        if (checkSelfPermission(android.Manifest.permission.RECEIVE_SMS) != PackageManager.PERMISSION_GRANTED){
+            requestPermissions(new String[] { android.Manifest.permission.RECEIVE_SMS } , CODIGO_SMS);
+        }
         listaAlunos = (ListView)findViewById(R.id.lista_alunos);
 
         carregaLista();
@@ -58,7 +68,7 @@ public class ListaAlunosActivity extends AppCompatActivity {
         List<Aluno> alunos = dao.buscaAlunos();
         dao.close();
 
-        ArrayAdapter<Aluno> adapter = new ArrayAdapter<Aluno>(this,android.R.layout.simple_list_item_1,alunos);
+        AlunosAdapter adapter = new AlunosAdapter(this,alunos);
         listaAlunos.setAdapter(adapter);
     }
 
@@ -120,5 +130,21 @@ public class ListaAlunosActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_lista_alunos, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_enviar_notas:
+                new EnviaDadosServidor(this).execute();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
