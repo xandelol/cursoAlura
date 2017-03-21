@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Agenda</string>
     <string name="form_activity">Formulario</string>
+    <string name="campo_nome">Nome</string>
+    <string name="campo_endereco">Endereco</string>
+    <string name="campo_telefone">Telefone</string>
+    <string name="campo_site">Site</string>
 </resources>
