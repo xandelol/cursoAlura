@@ -21,9 +21,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".FormularioActivity"
-            android:label="@string/form_activity">
-
-        </activity>
+            android:label="@string/form_activity"/>
+        <activity android:name=".ProvasActivity"
+            android:label="@string/form_provas_activity"/>
 
         <provider
             android:authorities="${applicationId}.provider"

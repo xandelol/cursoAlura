@@ -5,4 +5,5 @@
     <string name="campo_endereco">Endereco</string>
     <string name="campo_telefone">Telefone</string>
     <string name="campo_site">Site</string>
+    <string name="form_provas_activity">Provas</string>
 </resources>
